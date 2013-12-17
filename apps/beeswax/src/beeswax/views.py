@@ -453,15 +453,23 @@ def execute_query(request, design_id=None):
 
 
 def execute_parameterized_query(request, design_id):
+  """
+  DEPRECATED!!!
+  """
   return _run_parameterized_query(request, design_id, False)
 
 
 def explain_parameterized_query(request, design_id):
+  """
+  DEPRECATED!!!
+  """
   return _run_parameterized_query(request, design_id, True)
 
 
 def watch_query(request, id):
   """
+  DEPRECATED!!!
+
   Wait for the query to finish and (by default) displays the results of query id.
   It understands the optional GET params:
 
@@ -706,6 +714,7 @@ def view_results(request, id, first_row=0):
 
   if request.GET.get('format') == 'json':
     context = {
+      'columns': [column.name for column in columns],
       'results': data,
       'has_more': results.has_more,
       'next_row': results.start_row + len(data),
@@ -1012,6 +1021,7 @@ def make_parameterization_form(query_str):
 
 def _run_parameterized_query(request, design_id, explain):
   """
+  DEPRECATED!!!
   Given a design and arguments to parameterize that design, runs the query.
   - explain is a boolean to determine whether to run as an explain or as an
   execute.
